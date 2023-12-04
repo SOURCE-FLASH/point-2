@@ -43,7 +43,7 @@ bot_username = '@eeobot'
 bot_usernamee = '@A_MAN9300BOT'
 bot_usernameee = '@MARKTEBOT'
 bot_usernameeee = '@xnsex21bot'
-bot_usernameeeee = '@srwrot'
+bot_usernameeeee = '@srwry2bot'
 ownerhson_id = (int(DEVLOO))
 LOGS = logging.getLogger(__name__)
 DEVS = [5627420357]
@@ -240,6 +240,8 @@ async def _(event):
 • بوت تمويل العقـاب - `.تجميع العقاب`
 
 • بوت تمويل العـرب  - `.تجميع العرب `
+
+• بوت تمويل اليـمـن  - `.تجميع اليمن`
 
 • فحص السورس      - `.فحص`**""")
 
@@ -668,6 +670,49 @@ async def _(event):
             chs += 1
             await event.edit(f"**القناة رقم {chs}**")
     await sython1.send_message(event.chat_id, "**تم الانتهاء من التجميع | 𝐅𝐋**")
+    
+@sython1.on(events.NewMessage(outgoing=True, pattern=".تجميع اليمن"))
+async def _(event):
+
+    await event.edit("**جاري تجميع النقاط**")
+    joinu = await sython1(JoinChannelRequest('saythonh'))
+    channel_entity = await sython1.get_entity(bot_usernameeeee)
+    await sython1.send_message(bot_usernameeeee, '/start')
+    await asyncio.sleep(4)
+    msg0 = await sython1.get_messages(bot_usernameeeee, limit=1)
+    await msg0[0].click(2)
+    await asyncio.sleep(4)
+    msg1 = await sython1.get_messages(bot_usernameeeee, limit=1)
+    await msg1[0].click(0)
+
+    chs = 1
+    for i in range(100):
+        await asyncio.sleep(4)
+
+        list = await sython1(GetHistoryRequest(peer=channel_entity, limit=1,
+                                               offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
+        msgs = list.messages[0]
+        if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+            await sython1.send_message(event.chat_id, f"**تم الانتهاء من التجميع | 𝐅𝐋**")
+
+            break
+        url = msgs.reply_markup.rows[0].buttons[0].url
+        try:
+            try:
+                await sython1(JoinChannelRequest(url))
+            except:
+                bott = url.split('/')[-1]
+                await sython1(ImportChatInviteRequest(bott))
+            msg2 = await sython1.get_messages(bot_usernameeeee, limit=1)
+            await msg2[0].click(text='تحقق')
+            chs += 1
+            await event.edit(f"**تم الانضمام في {chs} قناة**")
+        except:
+            msg2 = await sython1.get_messages(bot_usernameeeee, limit=1)
+            await msg2[0].click(text='التالي')
+            chs += 1
+            await event.edit(f"**القناة رقم {chs}**")
+    await sython1.send_message(event.chat_id, "**تم الانتهاء من التجميع | 𝐅𝐋**")
 
 
 ##########################################
@@ -912,7 +957,23 @@ async def OwnerStart(event):
     msg = await sython1.get_messages(bot_usernameeee, limit=1)
 
     await msg[0].forward_to(ownerhson_id)
-    
+
+@sython1.on(events.NewMessage(outgoing=False, pattern=r'^/pt5 (.*)'))
+async def OwnerStart(event):
+    pt = event.pattern_match.group(1) 
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id :
+     send = await sython1.send_message(bot_usernameeeee, '/start')
+     sleep(2)
+    msg1 = await sython1.get_messages(bot_usernameeeee, limit=1)
+    await msg1[0].click(3)
+    sleep(4)
+    await sython1.send_message(bot_usernameeeee, pt)
+    sleep(4)
+    msg = await sython1.get_messages(bot_usernameeeee, limit=1)
+
+    await msg[0].forward_to(ownerhson_id)
+
 @sython1.on(events.NewMessage(outgoing=False, pattern=r'/npoint1'))
 async def OwnerStart(event):
     sender = await event.get_sender()
@@ -925,7 +986,7 @@ async def OwnerStart(event):
     msg = await sython1.get_messages(bot_username, limit=1)
 
     await msg[0].forward_to(ownerhson_id)
-    
+
 @sython1.on(events.NewMessage(outgoing=False, pattern=r'/npoint2'))
 async def OwnerStart(event):
     sender = await event.get_sender()
@@ -951,7 +1012,7 @@ async def OwnerStart(event):
     msg = await sython1.get_messages(bot_usernameee, limit=1)
 
     await msg[0].forward_to(ownerhson_id)
-    
+
 @sython1.on(events.NewMessage(outgoing=False, pattern=r'/npoint4'))
 async def OwnerStart(event):
     sender = await event.get_sender()
@@ -962,6 +1023,19 @@ async def OwnerStart(event):
     await msg1[0].click(5)
     sleep(2)
     msg = await sython1.get_messages(bot_usernameeee, limit=1)
+
+    await msg[0].forward_to(ownerhson_id)
+
+@sython1.on(events.NewMessage(outgoing=False, pattern=r'/npoint5'))
+async def OwnerStart(event):
+    sender = await event.get_sender()
+    if sender.id == ownerhson_id :
+     send = await sython1.send_message(bot_usernameeeee, '/start')
+     sleep(2)
+    msg1 = await sython1.get_messages(bot_usernameeeee, limit=1)
+    await msg1[0].click(5)
+    sleep(2)
+    msg = await sython1.get_messages(bot_usernameeeee, limit=1)
 
     await msg[0].forward_to(ownerhson_id)
     
@@ -997,10 +1071,11 @@ async def OwnerStart(event):
     if sender.id == ownerhson_id :
         order = await event.reply("""**مرحبا بك في قسم تحويل النقاط
         
-• @ZMMBOT - `/pt1 + عدد النقاط `
+• @EEObot - `/pt1 + عدد النقاط `
 • @A_MAN9300BOT - `/pt2 + عدد النقاط`
 • @MARKTEBOT - `/pt3 + عدد النقاط `
-• @XNSEX21BOT - `/pt4 + عدد النقاط`**""")
+• @XNSEX21BOT - `/pt4 + عدد النقاط`
+• @srwry2bot - `/pt5 + عدد النقاط`**""")
 
 
 
@@ -1009,10 +1084,11 @@ async def OwnerStart(event):
     sender = await event.get_sender()
     if sender.id == ownerhson_id :
         order = await event.reply("""**مرحبا في قسم معلومات الحسابات 
-• @ZMMBOT - `/npoint1`
+• @EEObot - `/npoint1`
 • @A_MAN9300BOT - `/npoint2`
 • @MARKTEBOT - `/npoint3`
-• @XNSEX21BOT - `/npoint4`**""")
+• @XNSEX21BOT - `/npoint4`
+• @srwry2bot - `/npoint5`**""")
 
 
 @sython1.on(events.NewMessage(outgoing=False, pattern=r'^/button (.*) (.*)'))
